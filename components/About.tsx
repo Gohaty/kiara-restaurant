@@ -8,13 +8,7 @@ export function About() {
     >
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
-          <p className="font-body text-xs tracking-[0.4em] text-kiara-motif uppercase">
-            Welcome
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <h2 className="mt-6 font-display text-4xl leading-tight font-light italic sm:text-5xl md:text-6xl">
+          <h2 className="font-display text-4xl leading-tight font-light italic sm:text-5xl md:text-6xl">
             Kumain ka na. <br className="hidden sm:block" />
             Make yourself at home.
           </h2>
