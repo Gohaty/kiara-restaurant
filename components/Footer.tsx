@@ -1,8 +1,14 @@
 import type { ReactNode } from "react";
+import { Mail } from "lucide-react";
 
 type FooterProps = {
   logo: ReactNode;
 };
+
+const FACEBOOK_URL =
+  "https://www.facebook.com/profile.php?id=61585738773286";
+const INSTAGRAM_URL = "https://www.instagram.com/kiararestoph";
+const EMAIL = "kiararestaurant.ph@gmail.com";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -49,23 +55,34 @@ export function Footer({ logo }: FooterProps) {
         </div>
 
         <p className="max-w-md font-display text-xl leading-relaxed italic sm:text-2xl">
-          Salamat sa pagdaan. Come back soon. Bring someone.
+          Share the love at Kiara&apos;s. See you soon.
         </p>
 
         <div className="flex items-center gap-6 text-kiara-cream/70">
           <a
-            href="#"
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Instagram"
             className="transition-colors hover:text-kiara-cream"
           >
             <InstagramIcon className="h-5 w-5" />
           </a>
           <a
-            href="#"
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Facebook"
             className="transition-colors hover:text-kiara-cream"
           >
             <FacebookIcon className="h-5 w-5" />
+          </a>
+          <a
+            href={`mailto:${EMAIL}`}
+            aria-label="Email Kiara"
+            className="transition-colors hover:text-kiara-cream"
+          >
+            <Mail className="h-5 w-5" strokeWidth={1.5} aria-hidden />
           </a>
         </div>
 
