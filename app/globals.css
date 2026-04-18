@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-kiara-burgundy: #673146;
+  --color-kiara-cream: #fff6e2;
+  --color-kiara-motif: #ab5f64;
+
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-body: var(--font-cormorant), ui-serif, Georgia, serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-kiara-cream);
+  color: var(--color-kiara-burgundy);
+  font-family: var(--font-body);
+  font-feature-settings: "liga", "kern";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #673146;
+  color: #fff6e2;
+}
