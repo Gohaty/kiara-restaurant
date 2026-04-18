@@ -15,6 +15,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(103 49 70 / 0.3) transparent;
 }
 
 body {
@@ -28,4 +30,23 @@ body {
 ::selection {
   background-color: #673146;
   color: #fff6e2;
+}
+
+/* Sleek scrollbar (WebKit / Chromium / Safari). */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(103 49 70 / 0.25);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(103 49 70 / 0.45);
+  background-clip: padding-box;
 }
