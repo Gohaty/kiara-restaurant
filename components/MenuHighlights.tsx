@@ -5,7 +5,31 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { EASE_KIARA } from "./motion";
-import { menuSections } from "./menuData";
+import { menuSections, type MenuItem } from "./menuData";
+
+function PriceBlock({ price }: { price: MenuItem["price"] }) {
+  if (typeof price === "string") {
+    return (
+      <span className="font-body text-base tracking-wide tabular-nums text-kiara-cream/85">
+        {price}
+      </span>
+    );
+  }
+  return (
+    <dl className="flex flex-col items-end gap-0.5 text-right font-body text-sm">
+      {price.map((tier) => (
+        <div key={tier.label} className="flex items-baseline gap-4">
+          <dt className="text-[0.65rem] tracking-[0.2em] text-kiara-cream/55 uppercase">
+            {tier.label}
+          </dt>
+          <dd className="w-12 tabular-nums text-kiara-cream/85">
+            {tier.amount}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 export function MenuHighlights() {
   const [activeId, setActiveId] = useState(menuSections[0].id);
@@ -20,16 +44,11 @@ export function MenuHighlights() {
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
           <Reveal>
-            <p className="font-body text-xs tracking-[0.4em] text-kiara-cream/60 uppercase">
-              A taste of what is on the table
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h2 className="mt-6 font-display text-4xl leading-tight font-light italic sm:text-5xl md:text-6xl">
+            <h2 className="font-display text-4xl leading-tight font-light italic sm:text-5xl md:text-6xl">
               From the kitchen, with love.
             </h2>
           </Reveal>
-          <Reveal delay={0.2}>
+          <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl font-body text-lg text-kiara-cream/75 sm:text-xl">
               The menu grows and changes with the season, the mood, and
               whatever tita is craving that week. Pick a corner of the house
@@ -38,7 +57,7 @@ export function MenuHighlights() {
           </Reveal>
         </div>
 
-        <Reveal delay={0.25}>
+        <Reveal delay={0.2}>
           <div
             role="tablist"
             aria-label="Menu categories"
@@ -54,7 +73,7 @@ export function MenuHighlights() {
                   aria-controls={`menu-panel-${section.id}`}
                   id={`menu-tab-${section.id}`}
                   onClick={() => setActiveId(section.id)}
-                  className={`relative snap-start shrink-0 rounded-full border px-5 py-2 font-body text-sm tracking-wide whitespace-nowrap transition-colors duration-500 sm:text-base ${
+                  className={`relative snap-start shrink-0 rounded-full border px-5 py-2 font-body text-sm tracking-wide whitespace-nowrap transition-colors duration-300 sm:text-base ${
                     isActive
                       ? "border-kiara-cream bg-kiara-cream text-kiara-burgundy"
                       : "border-kiara-cream/30 text-kiara-cream/75 hover:border-kiara-cream/60 hover:text-kiara-cream"
@@ -76,13 +95,13 @@ export function MenuHighlights() {
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.6, ease: EASE_KIARA }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.32, ease: EASE_KIARA }}
             >
               <div className="mx-auto max-w-2xl text-center">
-                <p className="font-body text-xs tracking-[0.35em] text-kiara-cream/55 uppercase">
+                <p className="font-body text-[0.65rem] tracking-[0.35em] text-kiara-cream/55 uppercase sm:text-xs">
                   {active.subtitle}
                 </p>
                 <h3 className="mt-3 font-display text-3xl italic sm:text-4xl">
@@ -90,32 +109,32 @@ export function MenuHighlights() {
                 </h3>
               </div>
 
-              <ul className="mx-auto mt-10 max-w-xl divide-y divide-kiara-cream/10">
+              <ul className="mx-auto mt-10 max-w-2xl divide-y divide-kiara-cream/10">
                 {active.items.map((item, i) => (
                   <motion.li
                     key={item.name}
-                    initial={{ opacity: 0, y: 8 }}
+                    initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
-                      duration: 0.55,
-                      delay: 0.05 * i,
+                      duration: 0.28,
+                      delay: 0.03 * i,
                       ease: EASE_KIARA,
                     }}
-                    className="flex items-baseline justify-between gap-6 py-5"
+                    className="flex items-start justify-between gap-8 py-6"
                   >
-                    <div>
-                      <p className="font-display text-lg sm:text-xl">
+                    <div className="min-w-0 flex-1">
+                      <p className="font-display text-lg leading-snug sm:text-xl">
                         {item.name}
                       </p>
                       {item.note && (
-                        <p className="mt-1 font-body text-sm text-kiara-cream/60 italic">
+                        <p className="mt-1.5 font-body text-sm text-kiara-cream/55 italic">
                           {item.note}
                         </p>
                       )}
                     </div>
-                    <span className="shrink-0 font-body text-sm tracking-widest text-kiara-cream/75">
-                      {item.price}
-                    </span>
+                    <div className="shrink-0 pt-1">
+                      <PriceBlock price={item.price} />
+                    </div>
                   </motion.li>
                 ))}
               </ul>
@@ -123,7 +142,7 @@ export function MenuHighlights() {
           </AnimatePresence>
         </div>
 
-        <Reveal delay={0.15}>
+        <Reveal delay={0.1}>
           <div className="mt-20 flex flex-col items-center gap-4 text-center">
             <a
               href="/menu.html"
