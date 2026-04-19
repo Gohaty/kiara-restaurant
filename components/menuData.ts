@@ -111,6 +111,52 @@ export const menuSections: MenuSection[] = [
     ],
   },
   {
+    id: "from-the-east",
+    eyebrow: "Travels & Borrowed Recipes",
+    title: "From the East",
+    subtitle: "Japanese favorites, brought home to the table.",
+    items: [
+      { name: "Tonkatsu", price: flat("208") },
+      { name: "Katsudon", price: flat("208") },
+      {
+        name: "Chicken Teriyaki",
+        price: tiers(["Solo", "250"], ["Sharing", "488"]),
+      },
+      {
+        name: "Garlic Pepper Beef",
+        price: tiers(["Solo", "208"], ["Sharing", "388"]),
+      },
+      { name: "Beef Gyudon", price: flat("258") },
+      { name: "Maki", price: tiers(["6 pcs", "180"]) },
+      { name: "Miso Soup", price: flat("188") },
+    ],
+  },
+  {
+    id: "from-the-subcontinent",
+    eyebrow: "Travels & Borrowed Recipes",
+    title: "From the Subcontinent",
+    subtitle: "Indian warmth, by way of the home kitchen.",
+    items: [
+      {
+        name: "Chicken Tikka Masala",
+        price: tiers(["Solo", "275"], ["Sharing", "429"], ["Family", "750"]),
+      },
+      {
+        name: "Chicken Tandoori",
+        price: tiers(["Sharing", "325"]),
+      },
+      {
+        name: "Chicken Biryani",
+        price: tiers(["Sharing", "350"], ["Family", "530"]),
+      },
+      {
+        name: "Mutton Biryani",
+        price: tiers(["Sharing", "788"], ["Family", "1288"]),
+        favorite: true,
+      },
+    ],
+  },
+  {
     id: "pansit",
     eyebrow: "Dine-In Portions",
     title: "Pansit",
@@ -190,53 +236,6 @@ export const menuSections: MenuSection[] = [
     ],
   },
   {
-    id: "from-the-east",
-    eyebrow: "Travels & Borrowed Recipes",
-    title: "From the East",
-    subtitle: "Japanese favorites, brought home to the table.",
-    items: [
-      { name: "Tonkatsu", price: flat("208") },
-      { name: "Katsudon", price: flat("208") },
-      {
-        name: "Chicken Teriyaki",
-        price: tiers(["Solo", "250"], ["Sharing", "488"]),
-      },
-      {
-        name: "Garlic Pepper Beef",
-        price: tiers(["Solo", "208"], ["Sharing", "388"]),
-      },
-      { name: "Beef Gyudon", price: flat("258") },
-      { name: "Maki", price: tiers(["6 pcs", "180"]) },
-      { name: "Miso Soup", price: flat("188") },
-    ],
-  },
-  {
-    id: "from-the-subcontinent",
-    eyebrow: "Travels & Borrowed Recipes",
-    title: "From the",
-    titleLine2: "Subcontinent",
-    subtitle: "Indian warmth, by way of the home kitchen.",
-    items: [
-      {
-        name: "Chicken Tikka Masala",
-        price: tiers(["Solo", "275"], ["Sharing", "429"], ["Family", "750"]),
-      },
-      {
-        name: "Chicken Tandoori",
-        price: tiers(["Sharing", "325"]),
-      },
-      {
-        name: "Chicken Biryani",
-        price: tiers(["Sharing", "350"], ["Family", "530"]),
-      },
-      {
-        name: "Mutton Biryani",
-        price: tiers(["Sharing", "788"], ["Family", "1288"]),
-        favorite: true,
-      },
-    ],
-  },
-  {
     id: "love-a-burger",
     eyebrow: "Between the Buns",
     title: "Love-a-Burger",
@@ -245,22 +244,22 @@ export const menuSections: MenuSection[] = [
       {
         name: "Regular Burger",
         price: flat("185"),
-        description: "Beef and pork patty mix, spicy.",
+        description: "Beef and pork patty, with a little fire.",
       },
       {
         name: "Special Burger",
         price: flat("285"),
-        description: "Two of them. For couples.",
+        description: "Two patties, best shared with someone you love.",
       },
       {
         name: "Burger ni Kuya",
         price: flat("285"),
-        description: "Double patty. Sapin-sapin. Not the dessert.",
+        description: "Double patty goodness. Nothing subtle here.",
       },
       {
         name: "Burger ni Lolo",
         price: flat("220"),
-        description: "Longganisa patty.",
+        description: "Longganisa patty, the one lolo keeps coming back for.",
       },
     ],
   },
@@ -330,25 +329,25 @@ export const menuSections: MenuSection[] = [
         name: "Beer Bucket 5+1",
         price: flat("688"),
         description:
-          "Mix and match based on available brands. Served with peanuts.",
+          "Mix and match from what\u2019s cold. Peanuts on the house.",
       },
       {
         name: "Beer Bucket 10+1",
         price: flat("1288"),
         description:
-          "Mix and match based on available brands. Served with sisig (sharing size).",
+          "Mix and match from what\u2019s cold. Served with sisig for the table.",
       },
       {
         name: "Signature Tower Drink",
         price: flat("788"),
         description:
-          "Galaxy Tower — grapes, brandy, blue curaçao wine. · Red Punch — strawberry, cherry, whiskey.",
+          "Galaxy Tower \u2014 grapes, brandy, blue cura\u00e7ao wine.\nRed Punch \u2014 strawberry, cherry, whiskey.",
       },
       {
         name: "Tower Drink Unlimited",
         price: flat("1288"),
         description:
-          "Bottomless tower. Peanuts served sharing size (not unlimited).",
+          "Bottomless pours. Peanuts share-sized, and very finite.",
       },
     ],
   },
