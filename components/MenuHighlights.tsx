@@ -5,19 +5,36 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { EASE_KIARA } from "./motion";
-import { menuSections, type MenuItem } from "./menuData";
+import { menuSections, type ItemPrice } from "./menuData";
 
-function PriceBlock({ price }: { price: MenuItem["price"] }) {
-  if (typeof price === "string") {
+const FEATURED_IDS = [
+  "lolas-kitchen",
+  "love-a-burger",
+  "para-sa-barkada",
+] as const;
+
+const featured = FEATURED_IDS.map(
+  (id) => menuSections.find((s) => s.id === id)!,
+);
+
+function PriceBlock({ price }: { price: ItemPrice }) {
+  if (price.kind === "flat") {
     return (
       <span className="font-body text-base tracking-wide tabular-nums text-kiara-cream/85">
-        {price}
+        {price.amount}
+      </span>
+    );
+  }
+  if (price.kind === "italic") {
+    return (
+      <span className="font-body text-base text-kiara-cream/70 italic">
+        {price.text}
       </span>
     );
   }
   return (
     <dl className="flex flex-col items-end gap-0.5 text-right font-body text-sm">
-      {price.map((tier) => (
+      {price.tiers.map((tier) => (
         <div key={tier.label} className="flex items-baseline gap-4">
           <dt className="text-[0.65rem] tracking-[0.2em] text-kiara-cream/55 uppercase">
             {tier.label}
@@ -32,9 +49,8 @@ function PriceBlock({ price }: { price: MenuItem["price"] }) {
 }
 
 export function MenuHighlights() {
-  const [activeId, setActiveId] = useState(menuSections[0].id);
-  const active =
-    menuSections.find((s) => s.id === activeId) ?? menuSections[0];
+  const [activeId, setActiveId] = useState(featured[0].id);
+  const active = featured.find((s) => s.id === activeId) ?? featured[0];
 
   return (
     <section
@@ -63,7 +79,7 @@ export function MenuHighlights() {
             aria-label="Menu categories"
             className="mt-16 flex flex-wrap justify-center gap-2 sm:gap-3"
           >
-            {menuSections.map((section) => {
+            {featured.map((section) => {
               const isActive = section.id === activeId;
               return (
                 <button
@@ -125,10 +141,23 @@ export function MenuHighlights() {
                     <div className="min-w-0 flex-1">
                       <p className="font-display text-lg leading-snug sm:text-xl">
                         {item.name}
+                        {item.aside && (
+                          <span className="ml-2 font-body text-base text-kiara-cream/70 italic">
+                            {item.aside}
+                          </span>
+                        )}
                       </p>
+                      {item.description && (
+                        <p className="mt-1.5 font-body text-sm text-kiara-cream/55 italic">
+                          {item.description}
+                        </p>
+                      )}
                       {item.note && (
                         <p className="mt-1.5 font-body text-sm text-kiara-cream/55 italic">
-                          {item.note}
+                          <span className="mr-2 font-smallcaps tracking-[0.18em] text-kiara-cream/70 uppercase not-italic">
+                            {item.note.prefix}
+                          </span>
+                          {item.note.text}
                         </p>
                       )}
                     </div>
@@ -145,9 +174,7 @@ export function MenuHighlights() {
         <Reveal delay={0.1}>
           <div className="mt-20 flex flex-col items-center gap-4 text-center">
             <a
-              href="/menu.html"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/menu"
               className="group inline-flex items-center gap-2 rounded-full border border-kiara-cream/40 px-7 py-3 font-body text-sm tracking-[0.25em] uppercase transition-colors hover:border-kiara-cream hover:bg-kiara-cream hover:text-kiara-burgundy"
             >
               See the full menu
