@@ -5,17 +5,24 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { EASE_KIARA } from "./motion";
+import { HeartMark } from "./HeartMark";
 import { menuSections, type ItemPrice } from "./menuData";
 
 const FEATURED_IDS = [
   "lolas-kitchen",
-  "love-a-burger",
-  "para-sa-barkada",
+  "from-the-subcontinent",
+  "almusal",
 ] as const;
 
-const featured = FEATURED_IDS.map(
-  (id) => menuSections.find((s) => s.id === id)!,
-);
+const PREVIEW_ITEM_LIMIT = 4;
+
+const featured = FEATURED_IDS.map((id) => {
+  const section = menuSections.find((s) => s.id === id)!;
+  const items = [...section.items]
+    .sort((a, b) => Number(Boolean(b.favorite)) - Number(Boolean(a.favorite)))
+    .slice(0, PREVIEW_ITEM_LIMIT);
+  return { ...section, items };
+});
 
 function PriceBlock({ price }: { price: ItemPrice }) {
   if (price.kind === "flat") {
@@ -140,6 +147,9 @@ export function MenuHighlights() {
                   >
                     <div className="min-w-0 flex-1">
                       <p className="font-display text-lg leading-snug sm:text-xl">
+                        {item.favorite && (
+                          <HeartMark className="mr-2 text-kiara-motif-soft" />
+                        )}
                         {item.name}
                         {item.aside && (
                           <span className="ml-2 font-body text-base text-kiara-cream/70 italic">
