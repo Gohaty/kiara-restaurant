@@ -405,7 +405,7 @@ function CoverPage() {
         className="pointer-events-none absolute inset-0 z-0 mix-blend-overlay"
         style={PAPER_TEXTURE}
       />
-      <div className="relative z-10 grid h-full place-items-center">
+      <div className="absolute inset-0 z-10 grid place-items-center">
         <p className="absolute top-14 right-0 left-0 m-0 text-center font-smallcaps text-[13px] font-medium tracking-[0.55em] text-kiara-cream/75 uppercase md:top-20">
           Catering
           <span className="mx-3 text-kiara-motif-soft">·</span>
@@ -496,12 +496,12 @@ function LetterPage({
   );
 }
 
-export function MenuBook() {
+export function MenuBook({ frameless = false }: { frameless?: boolean } = {}) {
   return (
     <main
       data-menu-frame
-      className="min-h-screen px-6 py-14 md:px-6 md:py-14"
-      style={FRAME_BACKGROUND}
+      className={`min-h-screen px-6 py-14 md:px-6 md:py-14 ${frameless ? "bg-white [&_[data-menu-page]]:shadow-none" : ""}`}
+      style={frameless ? undefined : FRAME_BACKGROUND}
     >
       <div className="mx-auto flex max-w-[960px] flex-col gap-10 md:gap-12">
         <CoverPage />

@@ -80,8 +80,12 @@ body {
   [data-menu-page] {
     box-shadow: none !important;
     margin: 0 !important;
+    height: 100vh !important;
+    min-height: 0 !important;
+    aspect-ratio: auto !important;
     page-break-after: always;
     break-inside: avoid;
+    overflow: hidden !important;
   }
   [data-menu-page]:last-child {
     page-break-after: auto;
