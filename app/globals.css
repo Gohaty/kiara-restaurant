@@ -54,3 +54,68 @@ body {
   background: rgb(103 49 70 / 0.45);
   background-clip: padding-box;
 }
+
+@media print {
+  @page {
+    size: 8.5in 11in;
+    margin: 0;
+  }
+  html,
+  body {
+    background: white !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  [data-menu-frame] {
+    background: white !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+  [data-menu-frame] > div {
+    gap: 0 !important;
+    max-width: none !important;
+  }
+  [data-menu-page] {
+    box-shadow: none !important;
+    margin: 0 !important;
+    page-break-after: always;
+    break-inside: avoid;
+  }
+  [data-menu-page]:last-child {
+    page-break-after: auto;
+  }
+  /* force desktop layout in print regardless of viewport */
+  [data-menu-page] [data-menu-row] {
+    align-items: flex-end !important;
+    gap: 14px !important;
+  }
+  [data-menu-page] [data-item-name] {
+    flex: 0 1 auto !important;
+    font-size: 24px !important;
+  }
+  [data-menu-page] [data-item-name] em {
+    font-size: 18px !important;
+  }
+  [data-menu-page] [data-leaders] {
+    display: block !important;
+  }
+  [data-menu-page] [data-tiered-price] {
+    display: block !important;
+    text-align: right !important;
+    font-size: 22px !important;
+  }
+  [data-menu-page] [data-tier] {
+    display: inline !important;
+    gap: 0 !important;
+  }
+  [data-menu-page] [data-tier-sep] {
+    display: inline !important;
+    margin: 0 8px !important;
+  }
+  [data-menu-page] [data-tier] > span:first-child:not([data-tier-sep]) {
+    font-size: 11px !important;
+    margin-right: 5px !important;
+  }
+}

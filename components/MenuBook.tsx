@@ -58,6 +58,7 @@ function PageShell({
 
   return (
     <section
+      data-menu-page
       className={`relative isolate flex w-full flex-col overflow-hidden px-8 pt-12 pb-14 shadow-[0_40px_80px_-40px_rgba(60,20,35,0.4),0_8px_24px_-12px_rgba(60,20,35,0.25)] sm:px-14 sm:pt-16 sm:pb-16 md:aspect-[8.5/11] md:px-24 md:pt-22 md:pb-24 ${toneBg} ${className}`}
     >
       <div
@@ -109,15 +110,15 @@ function PageFooter({
     tone === "cream" ? "text-kiara-motif" : "text-kiara-motif-soft";
   return (
     <div
-      className={`mt-auto grid grid-cols-[1fr_auto_1fr] items-center gap-4 pt-9 font-smallcaps text-[10px] tracking-[0.45em] uppercase opacity-70 ${accent}`}
+      className={`mt-auto flex flex-col items-center gap-3 pt-9 font-smallcaps text-[10px] tracking-[0.4em] uppercase opacity-70 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-4 sm:tracking-[0.45em] ${accent}`}
     >
-      <span className="justify-self-start">{left}</span>
-      <span className="flex items-center gap-1.5 justify-self-center">
+      <span className="order-2 sm:order-none sm:justify-self-start">{left}</span>
+      <span className="order-1 flex items-center gap-1.5 sm:order-none sm:justify-self-center">
         <HeartMark />
         <span aria-hidden>&mdash;</span>
         <span>Mom&rsquo;s favorite</span>
       </span>
-      <span className="justify-self-end">{right}</span>
+      <span className="order-3 sm:order-none sm:justify-self-end">{right}</span>
     </div>
   );
 }
@@ -189,7 +190,7 @@ function PriceDisplay({ price, tone }: { price: ItemPrice; tone: Tone }) {
   if (price.kind === "italic") {
     return (
       <span
-        className={`font-body text-[18px] font-medium whitespace-nowrap italic ${accent}`}
+        className={`font-body text-[16px] font-medium whitespace-nowrap italic md:text-[18px] ${accent}`}
       >
         {price.text}
       </span>
@@ -197,20 +198,27 @@ function PriceDisplay({ price, tone }: { price: ItemPrice; tone: Tone }) {
   }
   return (
     <span
-      className={`font-body text-lg font-bold tracking-[0.02em] whitespace-nowrap md:text-[22px] ${bold}`}
+      data-tiered-price
+      className={`flex flex-col items-end gap-0.5 font-body text-base font-bold tracking-[0.02em] whitespace-nowrap md:block md:text-lg md:leading-normal lg:text-[22px] ${bold}`}
     >
       {price.tiers.map((t, i) => (
-        <Fragment key={t.label}>
+        <span key={t.label} data-tier className="flex items-baseline gap-2 md:inline md:gap-0">
           {i > 0 && (
-            <span className={`mx-2 font-normal opacity-70 ${accent}`}>·</span>
+            <span
+              data-tier-sep
+              className={`hidden font-normal opacity-70 md:mx-2 md:inline ${accent}`}
+              aria-hidden
+            >
+              ·
+            </span>
           )}
           <span
-            className={`mr-[5px] font-smallcaps text-[11px] font-medium tracking-[0.2em] uppercase ${accent}`}
+            className={`font-smallcaps text-[10px] font-medium tracking-[0.2em] uppercase md:mr-[5px] md:text-[11px] ${accent}`}
           >
             {t.label}
           </span>
-          {t.amount}
-        </Fragment>
+          <span className="tabular-nums">{t.amount}</span>
+        </span>
       ))}
     </span>
   );
@@ -243,9 +251,13 @@ function MenuItemRow({
       : "border-kiara-cream/15";
 
   const row = (
-    <div className="flex w-full items-end gap-3.5">
+    <div
+      data-menu-row
+      className="flex w-full items-start gap-3 md:items-end md:gap-3.5"
+    >
       <span
-        className={`font-body text-[18px] font-bold tracking-[0.005em] md:text-[24px] ${nameColor}`}
+        data-item-name
+        className={`flex-1 font-body text-[17px] font-bold tracking-[0.005em] md:flex-initial md:text-[24px] ${nameColor}`}
       >
         {item.favorite && (
           <HeartMark className={`mr-2 ${asideColor}`} />
@@ -253,7 +265,7 @@ function MenuItemRow({
         {item.name}
         {item.aside && (
           <em
-            className={`ml-1.5 font-body text-base font-normal italic md:text-[18px] ${asideColor}`}
+            className={`ml-1.5 font-body text-sm font-normal italic md:text-[18px] ${asideColor}`}
           >
             {item.aside}
           </em>
@@ -261,7 +273,8 @@ function MenuItemRow({
       </span>
       <span
         aria-hidden
-        className={`mx-1 mb-[9px] min-w-5 flex-1 self-end border-b-[1.5px] border-dotted opacity-30 ${leaderColor}`}
+        data-leaders
+        className={`mx-1 mb-[9px] hidden min-w-5 flex-1 self-end border-b-[1.5px] border-dotted opacity-30 md:block ${leaderColor}`}
       />
       <PriceDisplay price={item.price} tone={tone} />
     </div>
@@ -486,6 +499,7 @@ function LetterPage({
 export function MenuBook() {
   return (
     <main
+      data-menu-frame
       className="min-h-screen px-6 py-14 md:px-6 md:py-14"
       style={FRAME_BACKGROUND}
     >

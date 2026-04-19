@@ -113,7 +113,7 @@ export function MenuHighlights() {
           role="tabpanel"
           id={`menu-panel-${active.id}`}
           aria-labelledby={`menu-tab-${active.id}`}
-          className="mt-14 h-[36rem] sm:h-[34rem]"
+          className="mt-14 md:h-[36rem]"
         >
           <AnimatePresence mode="wait">
             <motion.div
